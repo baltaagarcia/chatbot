@@ -7,7 +7,7 @@ def leer_preguntas_csv(nombre_archivo):
         lector = csv.DictReader(archivo)
         for fila in lector:
             pregunta = fila['pregunta'].lower()
-            respuesta = fila['respuesta'].strip()
+            respuesta = fila['respuesta']
             preguntas[pregunta] = respuesta
 
 
