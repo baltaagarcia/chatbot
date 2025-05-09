@@ -1,33 +1,47 @@
-
 import csv
-def leer_preguntas_csv(nombre_archivo):
-    preguntas = {}
-
+#recolectar preguntas y respuestas de un archivo CSV mediante su posicion(IMPAR=PREGUNTAS PAR=RESPUESTAS) en las filas
+def recolectar_preguntas_y_respuestas(nombre_archivo):
+    preguntas = []
+    respuestas = []
+    
     with open(nombre_archivo, newline='', encoding='utf-8') as archivo:
-        lector = csv.DictReader(archivo)
-        for fila in lector:
-            pregunta = fila['pregunta'].lower()
-            respuesta = fila['respuesta']
-            preguntas[pregunta] = respuesta
+        lector = csv.reader(archivo)
+        for i, fila in enumerate(lector):
+            if i % 2 == 0:  
+                preguntas.append(fila[0].strip().lower())
+            else:  
+                respuestas.append(fila[0].strip())
+    return preguntas, respuestas
 
 
-
-def buscar_pregunta(preguntas, consulta_usuario):
+def buscar_pregunta(preguntas, respuestas, consulta_usuario):
     consulta_usuario = consulta_usuario.lower()
     if consulta_usuario in preguntas:
-        return preguntas[consulta_usuario]
+        posicion = preguntas.index(consulta_usuario)  
+        return respuestas[posicion] 
     else:
-        return "No tengo la informacion para responder esta consulta"
+        return "No tengo la información para responder esta consulta."
+
     
 
 
 
 
 def main():
-    nombre_archivo = 'preguntas.csv'
-    preguntas = leer_preguntas_csv(nombre_archivo)
-    input_usuario= ""
-    while input_usuario.lower != "chau":
-        input_usuario=input("Bienvenido al ChatBot! Respondere tus consultas")
-        
+    
+    archivo_csv= 'preguntas_y_respuestas.csv'
+    preguntas, respuestas=recolectar_preguntas_y_respuestas(archivo_csv)
+    print(preguntas)
+    
+    input_usuario=input("Bienvenido al chatbot. Escribe 'salir' para terminar o escribe tu pregunta: ").strip()
+    while input_usuario != "salir":
+        buscar_pregunta(preguntas, respuestas,input_usuario)
+        if input_usuario in preguntas:
+            respuesta= buscar_pregunta(preguntas, respuestas, input_usuario)
+            print(respuesta)
+        else:
+            print("No tengo la informacion para responder esta consulta")
+        input_usuario=input("Bienvenido al chatbot. Escribe 'salir' para terminar o escribe tu pregunta: ").strip()
 
+           
+main()
