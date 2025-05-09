@@ -4,7 +4,7 @@ def recolectar_preguntas_y_respuestas(nombre_archivo):
     preguntas = []
     respuestas = []
     
-    with open(nombre_archivo, newline='', encoding='utf-8') as archivo:
+    with open(nombre_archivo,) as archivo:
         lector = csv.reader(archivo)
         for i, fila in enumerate(lector):
             if i % 2 == 0:  
@@ -41,6 +41,7 @@ def main():
             print(respuesta)
         else:
             print("No tengo la informacion para responder esta consulta")
+
         input_usuario=input("Bienvenido al chatbot. Escribe 'salir' para terminar o escribe tu pregunta: ").strip()
 
            
