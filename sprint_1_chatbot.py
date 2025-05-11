@@ -4,7 +4,7 @@ def recolectar_preguntas_y_respuestas(nombre_archivo):
     preguntas = []
     respuestas = []
     
-    with open(nombre_archivo, newline='', encoding='utf-8') as archivo:
+    with open(nombre_archivo,) as archivo:
         lector = csv.reader(archivo)
         for i, fila in enumerate(lector):
             if i % 2 == 0:  
@@ -13,7 +13,7 @@ def recolectar_preguntas_y_respuestas(nombre_archivo):
                 respuestas.append(fila[0].strip())
     return preguntas, respuestas
 
-
+#Busca la pregunta que ingresa en el usuario en la lista de preguntas y devuelve la respuesta correspondiente por su posicion
 def buscar_pregunta(preguntas, respuestas, consulta_usuario):
     consulta_usuario = consulta_usuario.lower()
     if consulta_usuario in preguntas:
@@ -29,7 +29,7 @@ def buscar_pregunta(preguntas, respuestas, consulta_usuario):
 
 def main():
     
-    archivo_csv= 'preguntas_y_respuestas.csv'
+    archivo_csv= 'preguntas_y_respuestas.csv' 
     preguntas, respuestas=recolectar_preguntas_y_respuestas(archivo_csv)
     print(preguntas)
     
@@ -41,6 +41,7 @@ def main():
             print(respuesta)
         else:
             print("No tengo la informacion para responder esta consulta")
+
         input_usuario=input("Bienvenido al chatbot. Escribe 'salir' para terminar o escribe tu pregunta: ").strip()
 
            
