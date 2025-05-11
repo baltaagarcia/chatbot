@@ -13,7 +13,7 @@ def recolectar_preguntas_y_respuestas(nombre_archivo):
                 respuestas.append(fila[0].strip())
     return preguntas, respuestas
 
-
+#Busca la pregunta que ingresa en el usuario en la lista de preguntas y devuelve la respuesta correspondiente por su posicion
 def buscar_pregunta(preguntas, respuestas, consulta_usuario):
     consulta_usuario = consulta_usuario.lower()
     if consulta_usuario in preguntas:
@@ -29,7 +29,7 @@ def buscar_pregunta(preguntas, respuestas, consulta_usuario):
 
 def main():
     
-    archivo_csv= 'preguntas_y_respuestas.csv'
+    archivo_csv= 'preguntas_y_respuestas.csv' 
     preguntas, respuestas=recolectar_preguntas_y_respuestas(archivo_csv)
     print(preguntas)
     
